@@ -1,5 +1,5 @@
 <section class="fundo2">
-    <section id="especialidades" class="site">
+    <section id="especialidades" class="site wow animate__fadeInUp">
         
         <h1>Tudo que seu <span>negócio</span> <br>
         precisa no digital</h1>

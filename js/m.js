@@ -130,3 +130,29 @@ function initCubos3D() {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 }
+
+/* ===== BANNER 3D: inclina com o mouse ===== */
+document.addEventListener('DOMContentLoaded', function () {
+  var banners = document.querySelectorAll('.banner3d');
+
+  banners.forEach(function (banner) {
+    var palco = banner.querySelector('.banner3d_palco');
+    if (!palco) { return; }   // sem palco, não há o que mexer
+
+    // Escuta a SEÇÃO inteira (e não só a imagem): se algo ficar por cima, ainda funciona
+    var area = banner.closest('section') || banner;
+
+    area.addEventListener('mousemove', function (e) {
+      var r = area.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;   // -0.5 (esquerda) até +0.5 (direita)
+      var y = (e.clientY - r.top) / r.height - 0.5;   // -0.5 (topo) até +0.5 (embaixo)
+      palco.style.setProperty('--banner3d-inclina-x', (52 - y * 14) + 'deg');
+      palco.style.setProperty('--banner3d-inclina-z', (-32 + x * 18) + 'deg');
+    });
+
+    area.addEventListener('mouseleave', function () {   // mouse saiu: volta pro lugar
+      palco.style.removeProperty('--banner3d-inclina-x');
+      palco.style.removeProperty('--banner3d-inclina-z');
+    });
+  });
+});

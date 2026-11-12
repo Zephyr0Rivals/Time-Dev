@@ -1,4 +1,4 @@
-<section id="especialistas">
+<section class="wow animate__fadeInUp" id="especialistas">
         <h1>Especialistas  
         <span>Time Dev</span></h1>
 

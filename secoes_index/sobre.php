@@ -2,7 +2,7 @@
     <section id="sobre">
         <h1>Conheça a Agência</h1>
 
-        <div class="sobre-cards">
+        <div class="sobre-cards wow animate__fadeInUp">
             <div class="card-direita">
                 <p>Somos uma equipe focada em transformar ideias em experiências digitais. Através do desenvolvimento web, buscamos criar sites que transmitam profissionalismo, organização e confiança</p>
             </div>

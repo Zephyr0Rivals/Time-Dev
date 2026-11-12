@@ -34,3 +34,22 @@ $(document).ready(function () {
     ]
   });
 });
+
+/* ===== VITRINE DE PROJETOS (o slick.js precisa do jQuery) ===== */
+$(function () {
+  // Quem pediu menos movimento no sistema não recebe troca automática
+  var reduzir = false;
+
+  $('.vitrine_carrossel').slick({
+    slide: 'article',        // os slides são <article> (o padrão do slick é <div>)
+    vertical: true,          // a coluna desliza para cima e para baixo
+    verticalSwiping: true,   // dá para arrastar com o dedo
+    infinite: true,          // depois do último volta o primeiro
+    autoplay: !reduzir,      // troca sozinho
+    autoplaySpeed: 5000,     // a cada 5 segundos
+    pauseOnHover: true,      // mouse em cima = pausa
+    speed: reduzir ? 0 : 600,
+    prevArrow: '.vitrine_botao_sobe',    // os botões ▲ e ▼ que já estão no HTML
+    nextArrow: '.vitrine_botao_desce'
+  });
+});

@@ -9,7 +9,7 @@
 
     <meta name="keywords" content="Time Dev, desenvolvimento de software, tecnologia, inovação, equipe de desenvolvimento">
 
-    <meta name="Autor" content="Time Dev - Matheus Joaquim, Guilherme">
+    <meta name="Autor" content="Time Dev - Matheus Joaquim, Guilherme Pignataro e Thiago >
 
     <!-- open graph (compartilçhar no Whats, face, x, linkedin) -->
     <meta property="og:title" content="Time Dev - Equipe de Desenvolvimento de Software">
@@ -92,6 +92,11 @@
     <!-- Slick -->
     <script src="js/slick.min.js"></script>
 
+    <script src="js/wow.min.js"></script>
+              <script>
+                new WOW({ animateClass: 'animate__animated' }).init();
+              </script>
+
     <!-- Script do grupo -->
     <script src="js/m.js"></script>
 
@@ -99,9 +104,5 @@
 
     <script src="js/t.js"></script>
 
-    <script src="js/wow.min.js"></script>
-              <script>
-              new WOW().init();
-              </script>
 </body>
 </html>

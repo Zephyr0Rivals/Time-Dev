@@ -1,4 +1,4 @@
-<section id="faq">
+<section class="wow animate__fadeInUp" id="faq">
     <div class="faq-header">
         <h1>FAQ</h1>
         <h2>Dúvidas Frequentes</h2>

@@ -10,6 +10,19 @@ svg {
 }
 
 @media (max-width: 1100px) {
+    :root{
+    --banner3d-altura:440px;
+    --banner3d-escala:1.2;
+    --banner3d-fonte-etiqueta:.9rem;
+
+    --vitrine-altura-slide:400px;
+    --vitrine-fonte-nome:1.9rem;
+    --vitrine-fonte-texto:1rem;
+    --vitrine-botao:56px;
+  }
+  
+
+    
     #topo {
         width: calc(100% - 40px);
         height: auto;
@@ -18,6 +31,8 @@ svg {
         padding: 12px 18px;
         gap: 14px;
     }
+
+    
 
     #topo h1 {
         flex: 0 0 60px;
@@ -106,6 +121,8 @@ svg {
         margin-bottom: 80px;
     }
 
+    .vitrine_carrossel .vitrine_slide{ gap:1.5rem; }
+
     .portfolio-cards {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -130,13 +147,21 @@ svg {
     #servicos .card p {
         font-size: 21px;
     }
+
 }
 
 @media (max-width: 768px) {
-    .site {
-        width: calc(100% - 32px);
-    }
 
+    :root{
+    --banner3d-altura:380px;
+    --banner3d-escala:.95;
+    --banner3d-fonte-etiqueta:.85rem;
+
+    --vitrine-altura-slide:560px;
+    --vitrine-fonte-titulo:clamp(1.8rem,6vw,2.6rem);
+    --vitrine-fonte-nome:1.7rem;
+  }
+   
     #topo {
         width: calc(100% - 24px);
         min-height: 0;
@@ -303,6 +328,13 @@ svg {
         padding: 40px 0;
     }
 
+    .vitrine_conteudo{ grid-template-columns:1fr; }
+    .vitrine_botoes{ flex-direction:row; justify-content:center; }
+    .vitrine_carrossel .vitrine_slide{ grid-template-columns:1fr; gap:1rem; }
+    .vitrine_imagem{ height:240px; }
+        .site {
+            width: calc(100% - 32px);
+        }
     .portfolio-cards {
         grid-template-columns: 1fr;
         gap: 22px;
@@ -322,6 +354,7 @@ svg {
         max-height: none;
         opacity: 1;
     }
+
 
     #servicos {
         margin-top: 24px;
@@ -409,6 +442,19 @@ svg {
 }
 
 @media (max-width: 480px) {
+    :root{
+    --banner3d-altura:320px;
+    --banner3d-escala:.7;
+    --banner3d-fonte-etiqueta:.75rem;
+
+    --vitrine-altura-slide:620px;
+    --vitrine-fonte-nome:1.5rem;
+    --vitrine-fonte-texto:.95rem;
+    --vitrine-botao:48px;
+  }
+  
+
+
     .site {
         width: calc(100% - 24px);
     }
@@ -459,6 +505,10 @@ svg {
         font-size: 16px;
     }
 
+    .vitrine_projetos{ padding:3rem 1rem 4rem; }
+    
+    .vitrine_imagem{ height:200px; }
+
     .portfolio-cards h2 {
         font-size: 24px;
     }
@@ -467,6 +517,7 @@ svg {
         padding: 10px 18px 22px;
         font-size: 16px;
     }
+
 
     #servicos .conteudo-servicos {
         width: calc(100% - 28px);
@@ -515,4 +566,5 @@ svg {
     .contato-formulario {
         padding: 20px 14px;
     }
+
 }

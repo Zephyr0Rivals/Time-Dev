@@ -34,6 +34,29 @@ VARIAVEIS DO TIME DEV
     --cor-borda: #f2f2f2;
     --cor-fundo: #1A1A1A;
     --cor-fundo2: #027333;
+
+    --cor1:#6D28D9; 
+    --cor2:#EC4899; 
+    --cor3:#2563EB;
+
+    --banner3d-cor-folha-1:var(--cor-titulo);
+    --banner3d-cor-folha-2:var(--cor-fundo2);
+    --banner3d-cor-brilho:var(--cor-destaque);
+    --banner3d-cor-destaque:var(--cor-destaque);
+
+    --banner3d-cor-nome:#67e8f9;       /* palavra "Home" */
+    --banner3d-cor-codigo:#c7d2fe;     /* resto do código */
+    --banner3d-cor-fundo-etiqueta:rgba(17,24,39,.7);
+    --banner3d-cor-texto-etiqueta:#f2f2f2;
+
+    --banner3d-altura:480px;          /* era 420px */
+    --banner3d-escala:1.2;            /* 1 = tamanho original, 1.5 = 50% maior */
+    --banner3d-fonte-etiqueta:1rem;
+
+
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); 
+    padding-bottom:env(safe-area-inset-bottom,0px);
 }
 
 
@@ -42,6 +65,22 @@ VARIAVEIS DO TIME DEV
     --fonte-titulo: "Montserrat", sans-serif;
     --fonte-texto: "Poppins", sans-serif;
 }
+
+html{
+    height:100%
+} 
+
+*{
+    box-sizing:border-box
+}
+body{
+    margin:0;
+    background:var(--fundo);
+    color:var(--texto);
+    font-family: var(--fonte-titulo);
+    line-height:1.6
+}
+
 #topo {
     margin: 0 auto;
     position: relative;
@@ -199,135 +238,135 @@ VARIAVEIS DO TIME DEV
 }
 
 /* Coluna da Direita - PC e Carrossel Slick */
-#hero .hero_pc {
-    position: relative;
-    flex: 1;
-    max-width: 600px;
-    animation: pc-flutuar 5s ease-in-out infinite;
-    will-change: transform;
-}
 
-.pc_moldura {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
-    filter: drop-shadow(0 0 5px rgba(70, 255, 145, 0.8))
-            drop-shadow(0 0 16px rgba(35, 220, 105, 0.55))
-            drop-shadow(0 0 30px rgba(15, 170, 70, 0.3));
-}
-
-/* Brilho verde acompanhando o recorte da moldura e movimento suave. */
-@keyframes pc-flutuar {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
+    /* A área do banner. 
+    "perspective" = a distância do seu olho até o objeto. 
+    Sem ela, tudo fica chapado. 
+    */
+    .banner3d{
+        position:relative;
+        display:grid;
+        place-items:center;
+        height:var(--banner3d-altura);
+        perspective: 1600px;
     }
-    50% {
-        transform: translateY(-9px) rotate(-0.4deg);
+
+    /* O palco inclina tudo de uma vez. "preserve-3d" avisa: os filhos vivem em 3D também. */
+    .banner3d_palco{
+        position:relative;
+        width:400px;
+        height:300px;
+        transform-style:preserve-3d;
+        transform:rotateX(var(--banner3d-inclina-x,52deg)) rotateZ(var(--banner3d-inclina-z,-32deg))
+                scale3d(var(--banner3d-escala), var(--banner3d-escala), var(--banner3d-escala));
+        transition:transform .25s ease-out;
     }
-}
 
-@media (prefers-reduced-motion: reduce) {
-    #hero .hero_pc {
-        animation: none;
+    /* Cada folha é uma "folha de vidro". 
+    --banner3d-altura-folha é a altura em que ela fica. */
+    .banner3d_folha{
+        position:absolute;
+        inset:0;
+        box-sizing:border-box;
+        border-radius:14px;
+        transform:translateZ(var(--banner3d-altura-folha));
+        border:1px solid rgba(255,255,255,.18);
+        background:linear-gradient(135deg,
+            color-mix(in srgb,var(--banner3d-cor-folha-1) 45%,transparent),
+            color-mix(in srgb,var(--banner3d-cor-folha-2) 20%,transparent));
+        backdrop-filter:blur(6px);
+        box-shadow:0 0 40px color-mix(in srgb,var(--banner3d-cor-brilho) 50%,transparent);
+        animation:banner3d_flutuar 5s ease-in-out infinite;
     }
-}
+    .banner3d_folha_base{--banner3d-altura-folha:0px}
+    .banner3d_folha_meio{--banner3d-altura-folha:70px;animation-delay:-1.6s} /* notasse que o delay do do meio é a metade do topo*/
+    .banner3d_folha_topo{--banner3d-altura-folha:140px;animation-delay:-3.2s;padding:1rem}
 
-.pc_tela_carrossel {
-    position: absolute;
-    z-index: 1;
-    
-/* Posição da tela dentro de pc.png*/
-    top: 5%;
-    width: 100%;
-    height: 70%;
-    
-    overflow: hidden;
-    background-color: #000;
-}
-
-@media (max-width: 1200px) {
-    .pc_tela_carrossel {
-        /* Empurra a tela para dentro das bordas laterais do notebook */
-        left: 10%;       /* Ajuste esse % para centralizar na horizontal */
-        width: 80%;      /* Reduz a largura para não passar da borda do notebook */
-
-        /* Ajusta o topo e a altura da tela */
-        top: 5%;        /* Ajuste esse % para alinhar com o topo do display */
-        height: 75%;     /* Ajuste esse % para a base da tela não invadir o teclado */
+    /* A mágica: a folha sobe e desce 26px, devagarinho, para sempre. */
+    @keyframes banner3d_flutuar{
+    50%{transform:translateZ(calc(var(--banner3d-altura-folha) + 26px))}
     }
-}
 
-/* Efeito verde sutil aplicada somente sobre os projetos exibidos na tela. */
-.pc_tela_carrossel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: rgba(47, 255, 134, 0.288);
-    mix-blend-mode: screen;
-}
+    /* Código na folha de cima: uma linha por span, sem <pre> */
+    .banner3d_codigo{
+    font:12px/1.7 ui-monospace,Menlo,monospace;
+    color:var(--banner3d-cor-codigo);
+    }
+    .banner3d_linha{display:block;white-space:nowrap}
+    .banner3d_recuo_1{padding-left:1.2em}
+    .banner3d_recuo_2{padding-left:2.4em}
+    .banner3d_recuo_3{padding-left:3.6em}
+    .banner3d_codigo_palavra{color:var(--banner3d-cor-destaque)}
+    .banner3d_codigo_nome{color:var(--banner3d-cor-nome)}
 
-/* Força os elementos do Slick a preencherem a altura da tela */
-.slick_slider, 
-.slick_slider .slick-list, 
-.slick_slider .slick-track, 
-.slick_slider .slick-slide > div {
-    height: 100%;
-}
+    /* Etiquetas que flutuam fora do palco (essas são 2D normais) */
+    .banner3d_etiqueta{
+        position:absolute;
+        padding:.4rem .9rem;
+        border-radius:8px;
+        font-size:var(--banner3d-fonte-etiqueta);
+        color:var(--banner3d-cor-texto-etiqueta);
+        border:1px solid rgba(255,255,255,.2);
+        background:var(--banner3d-cor-fundo-etiqueta);
+        animation:banner3d_balanca 4s ease-in-out infinite;
+    }
+    .banner3d_etiqueta_1{top:12%;right:4%}
+    .banner3d_etiqueta_2{top:24%;right:0;animation-delay:-1s}
+    .banner3d_etiqueta_3{top:36%;right:8%;animation-delay:-2s}
+    @keyframes banner3d_balanca{50%{transform:translateY(-8px)}}
 
-.slick_slider img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    /* Celular: diminui o banner */
+    @media (max-width:760px){
+    .banner3d{height:340px;transform:scale(.75)}
+    }
 
+/* Quem pediu menos movimento no sistema vê tudo parado */
+/* @media (prefers-reduced-motion:reduce) {
+  .banner3d_folha,.banner3d_etiqueta{animation:none}
+} */
 /* Fundo compartilhado das seções */
-.fundo-compartilhado {
-  background-image: url('../assets/fundo-compartilhado.png'); 
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  padding-top: 50px;
-  width: 100%;
-}
-#servicos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 60px auto 0 auto; 
-    padding: 50px 0;
-    background-color: var(--cor-fundo);
-}
-
-#servicos .conteudo-servicos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 150px;
-    margin: 0 auto;
-    max-width: 1250px;
-    width: 90%;
-}
-
-
-
-#servicos .card {
-    position: relative;
-    padding: 60px 40px 40px 40px;
-    background-color: rgba(65, 63, 63, 0.438);
-    border-radius: 65px;
-    max-width: 1250px;
+    .fundo-compartilhado {
+    background-image: url('../assets/fundo-compartilhado.png'); 
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    padding-top: 50px;
     width: 100%;
-    box-sizing: border-box;
+    }
+    #servicos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 60px auto 0 auto; 
+        padding: 50px 0;
+        background-color: var(--cor-fundo);
+    }
 
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
+    #servicos .conteudo-servicos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 150px;
+        margin: 0 auto;
+        max-width: 1250px;
+        width: 90%;
+    }
+
+
+
+    #servicos .card {
+        position: relative;
+        padding: 60px 40px 40px 40px;
+        background-color: rgba(65, 63, 63, 0.438);
+        border-radius: 65px;
+        max-width: 1250px;
+        width: 100%;
+        box-sizing: border-box;
+
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
 
 /* Criando a borda recortada via pseudo-elemento */
 #servicos .card::before {
